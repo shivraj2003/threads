@@ -17,27 +17,15 @@ const Home = () => {
       try {
         const res= await fetch('/api/posts/feed')
         const data =await res.json()
+        console.log(data)
         if(data.error){
           showToast("Error",data.error,"error")
           return
         }
-        //parse the data in array
-        const parsedData = data.data.map((post)=>{
-          return {
-            _id:post._id,
-            postedBy:post.postedBy,
-            content:post.content,
-            createdAt:post.createdAt,
-            updatedAt:post.updatedAt
-          }
-        })
-        setPosts(parsedData);
-       
-        // if (Array.isArray(data)) {
-        //   setPosts(data);
-        // } else {
-        //   console.log(data)
-        // }
+      
+        
+        setPosts(data);
+      
       } catch (error) {
         console.log(error)
       }finally{
