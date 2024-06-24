@@ -21,10 +21,25 @@ const Home = () => {
           showToast("Error",data.error,"error")
           return
         }
+        //parse the data in array
+        const parsedData = data.data.map((post)=>{
+          return {
+            _id:post._id,
+            postedBy:post.postedBy,
+            content:post.content,
+            createdAt:post.createdAt,
+            updatedAt:post.updatedAt
+          }
+        })
+        setPosts(parsedData);
        
-        setPosts(data)
+        // if (Array.isArray(data)) {
+        //   setPosts(data);
+        // } else {
+        //   console.log(data)
+        // }
       } catch (error) {
-        showToast("Error",error.message,"error")
+        console.log(error)
       }finally{
         setLoading(false)
       }
@@ -39,7 +54,7 @@ const Home = () => {
            <Spinner size={'xl'}/>
       </Flex>
      )}
-     {posts.map((post)=>{
+     {posts?.map((post)=>{
       return (
         <Post key={post._id} post={post} postedBy={post.postedBy}/>
       )
