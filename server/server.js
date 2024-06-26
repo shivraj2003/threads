@@ -14,7 +14,12 @@ dotenv.config()
 
 connectDB()
 const app=express()
-app.use(cors())
+app.use(cors(
+    // {
+    //     origin:true,
+    //     credentials:true
+    // }
+))
 const Port = process.env.PORT || 8000
 const __dirname = path.resolve()
 console.log('dirname',__dirname)
